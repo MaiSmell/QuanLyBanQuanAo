@@ -69,19 +69,21 @@ namespace QLBH.BLL
         //}
 
 
-        public override SingleRsp Update(KhachHang kh)
+        public SingleRsp UpdateCustomer(CustomerReq customerReq)
         {
             var res = new SingleRsp();
-            var m1 = _rep.Read(kh.MaKh);
-            if (m1 == null)
-            {
-                res.SetError("EZ103", "No data.");
-            }
-            else
-            {
-                res = base.Update(kh);
-                res.Data = kh;
-            }
+
+            var exist = _rep.Read(customerReq.MaKh);
+
+            exist.MaKh = customerReq.MaKh;
+            exist.HoKh = customerReq.HoKh;
+            exist.TenKh = customerReq.TenKh;
+            exist.DiaChi = customerReq.DiaChi;
+            exist.Sdt = customerReq.Sdt;
+            exist.TinhThanh = customerReq.TinhThanh;
+
+
+            res = customerRep.UpdateCustomer(exist);
             return res;
         }
         // them don hang

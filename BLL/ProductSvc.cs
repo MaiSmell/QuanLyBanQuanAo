@@ -30,23 +30,7 @@ namespace QLBH.BLL
             return res;
         }
 
-        //public override SingleRsp Update(SanPham m)
-        //{
-        //    var res = new SingleRsp();
-        //    var m1 = _rep.Read(m.MaSp);
-        //    if (m1 == null)
-        //    {
-        //        res.SetError("EZ103", "No data.");
-        //    }
-        //    else
-        //    {
-        //        res = base.Update(m);
-        //        res.Data = m;
-        //    }
-        //    return res;
-        //}
-
-        // dieu chinh lai.
+        
         public SingleRsp UpdateProduct(ProductReq productReq)
         {
             var res = new SingleRsp();
@@ -97,7 +81,27 @@ namespace QLBH.BLL
                 return res;
             }
         }
+        public SingleRsp SearchProduct(SearchProductcReq searchProductcReq)
+        {
+            var res = new SingleRsp();
+            //lấy dssp theo từ khóa
+            var product = productRep.SearchProduct(searchProductcReq.KeyWord);
+            //xử lý phân trang 
+            int pCount, totalPage, offSet;
+            offSet = searchProductcReq.Size *( searchProductcReq.Page -1);
+            pCount = product.Count;
 
+            totalPage = (pCount % searchProductcReq.Size) == 0? pCount / searchProductcReq.Size :1 
+                + (pCount / searchProductcReq.Size);
+            var p = new
+            {
+                Data = product.Skip(offSet).Take(searchProductcReq.Size).ToList(),
+                page = searchProductcReq.Page,
+                Size = searchProductcReq.Size
+            };
+            res.Data = p;
+            return res;
+        }
 
     }
 }

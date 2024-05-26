@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QLBH.Common.DAL;
 using QLBH.Common.Rsp;
 using QLBH.DAL.Models;
@@ -62,13 +63,13 @@ namespace QLBH.DAL
                         context.SanPhams.Update(product);
                         context.SaveChanges();
                         tran.Commit();
-                        res.SetMessage("Update Employee thanh cong");
+                        res.SetMessage("Cập nhật sản phẩm thành công!!!!");
                     }
                     catch (Exception ex)
                     {
                         tran.Rollback();
                         res.SetError(ex.StackTrace);
-                        res.SetMessage("Update Employee that bai");
+                        res.SetMessage("Cập nhật sản phẩm thất bại!!!!");
                     }
                 }
             }
@@ -95,6 +96,14 @@ namespace QLBH.DAL
                 }
             }
             return res;
+        }
+
+
+        public List<SanPham> SearchProduct(string keyWord)
+        {
+            
+           
+            return All.Where(x => x.TenSp.Contains(keyWord)).ToList();
         }
     }
 }

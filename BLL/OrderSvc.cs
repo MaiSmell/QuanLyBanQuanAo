@@ -25,6 +25,7 @@ namespace QLBH.BLL
         public override SingleRsp Read(int id)
         {
             var res = new SingleRsp();
+           
             res.Data = _rep.Read(id);
             return res;
         }
@@ -68,7 +69,22 @@ namespace QLBH.BLL
             return res;
         }
 
+        public SingleRsp UpdateOrder(int id, OrderReq orderReq)
+        {
+            var res = new SingleRsp();
+            var order = orderRep.Read(id);
+            order.MaDh = order.MaDh;
+            order.MaKh = order.MaKh;
+            order.MaShipper = order.MaShipper;
+            order.ChiTietDhs = order.ChiTietDhs;
+            order.PhiVc = order.PhiVc;
+            order.ChiTietDhs = order.ChiTietDhs;
+            order.NgayDatHang = order.NgayDatHang;
+            order.NgayGiaoHang = order.NgayGiaoHang;
+            res = orderRep.UpdateOrder(order);
+            return res;
+        }
 
-        
+
     }
 }

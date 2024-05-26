@@ -39,6 +39,18 @@ namespace QuanLyBanQuanAo.Web.Controllers
             //var res = new SingleRsp
             return Ok(customerSvc.CreateCustomer(customerReq));
         }
+        [HttpPut("Update-Customer")]
+        public IActionResult UpdateCustomer(string keyWord, [FromBody] CustomerReq customerReq)
+        {
+            if (!string.Equals(keyWord, customerReq.MaKh))
+            {
+                return BadRequest("Không tồn tại sản phẩm ");
+            }
+            var res = new SingleRsp();
+            res = customerSvc.UpdateCustomer(customerReq);
+            return Ok(res);
+
+        }
         [HttpDelete("Delete-Product")]
         public IActionResult DeleteCustomer([FromBody] SimpleReq req)
         {

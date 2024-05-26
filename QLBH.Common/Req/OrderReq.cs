@@ -8,7 +8,7 @@ namespace QLBH.Common.Req
 {
     public class OrderReq
     {
-        
+        public int MaDh { get; set; }
         public string MaKh { get; set; }
         public string MaNv { get; set; }
         public string MaShipper { get; set; }

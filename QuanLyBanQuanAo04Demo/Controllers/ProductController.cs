@@ -40,11 +40,11 @@ namespace QuanLyBanQuanAo.Web.Controllers
         }
 
 
-        // dieu chinh lai..
+        
         [HttpPut ("Update-Product")]
         public IActionResult UpdateProduct(string keyWord, [FromBody] ProductReq productReq)
         {
-            if (keyWord == productReq.MaSp)
+            if (!string.Equals(keyWord, productReq.MaSp))
             {
                 return BadRequest("Không tồn tại sản phẩm ");
             }
@@ -58,6 +58,14 @@ namespace QuanLyBanQuanAo.Web.Controllers
         {
            
             return Ok(productSvc.DeleteProduct(req.Keyword));
+        }
+
+        [HttpPost ("Search-Product")]
+        public IActionResult SearchProduct([FromBody] SearchProductcReq searchProductcReq)
+        {
+            var res = new SingleRsp();
+            res.Data = productSvc.SearchProduct(searchProductcReq);
+            return Ok(res);
         }
     }
 }

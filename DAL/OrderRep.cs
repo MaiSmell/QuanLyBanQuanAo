@@ -15,16 +15,13 @@ namespace QLBH.DAL
         //lay ra don hang theo id
         public override DonHang Read(int id)
         {
+
             var res = All.FirstOrDefault(o => o.MaDh == id);
+
             return res;
         }
-        //xoa don hang theo id
-        public int Remove (int id)
-        {
-            var m = base.All.First (i => i.MaDh == id);
-            m = base.Delete(m);
-            return m.MaDh;
-        }
+       
+       
         //thêm đơn hàng
         //public SingleRsp CreateOrder(DonHang order)
         //{
@@ -103,7 +100,30 @@ namespace QLBH.DAL
             }
             return res;
         }
-
+        public SingleRsp UpdateOrder (DonHang order)
+        {
+            var res = new SingleRsp();
+            using (var context = new QLBHContext())
+            {
+                using (var tran = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        context.DonHangs.Update(order);
+                        context.SaveChanges();
+                        tran.Commit();
+                        res.SetMessage("Cập nhật thành công");
+                    }
+                    catch (Exception ex)
+                    {
+                        tran.Rollback();
+                        res.SetError(ex.StackTrace);
+                        res.SetMessage("Cập nhật thất bại ");
+                    }
+                }
+            }
+            return res;
+        }
         
     }
 }

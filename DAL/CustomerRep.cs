@@ -55,6 +55,31 @@ namespace QLBH.DAL
             return res;
         }
 
+        public SingleRsp UpdateCustomer(KhachHang khachHang)
+        {
+            var res = new SingleRsp();
+
+            using (var context = new QLBHContext())
+            {
+                using (var tran = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        context.KhachHangs.Update(khachHang);
+                        context.SaveChanges();
+                        tran.Commit();
+                        res.SetMessage("Cập nhật khách hàng thành công!!!");
+                    }
+                    catch (Exception ex)
+                    {
+                        tran.Rollback();
+                        res.SetError(ex.StackTrace);
+                        res.SetMessage("Cập nhật khách hàng thất bại!!!");
+                    }
+                }
+            }
+            return res;
+        }
 
         public SingleRsp DeleteCustomer (KhachHang khachHang)
         {

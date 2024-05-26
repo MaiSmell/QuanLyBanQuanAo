@@ -49,7 +49,13 @@ namespace QuanLyBanQuanAo.Web.Controllers
         {
             return Ok(orderSvc.DeleteOrder(id));
         }
-        
+        [HttpPut("Update-Order")]
+        public IActionResult UpdateOrder(int id, [FromBody] OrderReq orderReq)
+        {
+            var res = orderSvc.UpdateOrder(id, orderReq);
+
+            return Ok(res);
+        }
 
     }
     
