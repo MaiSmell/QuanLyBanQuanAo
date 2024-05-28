@@ -73,7 +73,7 @@ namespace QLBH.BLL
         {
             var res = new SingleRsp();
             var order = orderRep.Read(id);
-            order.MaDh = order.MaDh;
+            
             order.MaKh = order.MaKh;
             order.MaShipper = order.MaShipper;
             order.ChiTietDhs = order.ChiTietDhs;
@@ -84,7 +84,7 @@ namespace QLBH.BLL
             res = orderRep.UpdateOrder(order);
             return res;
         }
-
+        
 
     }
 }

@@ -33,6 +33,23 @@ namespace QLBH.BLL
             res.Data= result;
             return res;
         }
+        public object TongDoanhThuTheoQuy(int quarter)
+        {
+            if (quarter < 1 || quarter > 4)
+            {
+                throw new ArgumentException("Invalid quarter. Quarter should be between 1 and 4.");
+            }
+
+            int currentYear = DateTime.Now.Year;
+            decimal totalRevenue = statisticRep.TongDoanhThuTheoQuy(currentYear, quarter);
+
+            return new
+            {
+                Year = currentYear,
+                Quarter = quarter,
+                TongDoanhThu = totalRevenue
+            };
+        }
         public SingleRsp TongDoanhThuTheoThangCuaNam(int month, int year )
         {
             var res = new SingleRsp();

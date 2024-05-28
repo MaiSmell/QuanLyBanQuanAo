@@ -12,11 +12,13 @@ namespace QLBH.BLL
 {
     public class StatisticSizeSvc : GenericSvc<StatisticSizeRep, SanPhamSize>
     {
-        private StatisticSizeSvc statisticRep;
+        private StatisticSizeSvc statisticSizeRep;
 
         public SingleRsp ThongkeSize()
         {
             var res = new SingleRsp();
+            var ds = statisticSizeRep.ThongkeSize();
+            res.Data = ds;
             
             return res;
         }

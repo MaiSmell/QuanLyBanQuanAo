@@ -29,6 +29,39 @@ namespace QLBH.DAL
             return total;
 
         }
+        public decimal TongDoanhThuTheoQuy (int year, int quarter)
+        {
+            DateTime startDate, endDate;
+
+            switch (quarter)
+            {
+                case 1:
+                    startDate = new DateTime(year, 1, 1);
+                    endDate = new DateTime(year, 3, 31);
+                    break;
+                case 2:
+                    startDate = new DateTime(year, 4, 1);
+                    endDate = new DateTime(year, 6, 30);
+                    break;
+                case 3:
+                    startDate = new DateTime(year, 7, 1);
+                    endDate = new DateTime(year, 9, 30);
+                    break;
+                case 4:
+                    startDate = new DateTime(year, 10, 1);
+                    endDate = new DateTime(year, 12, 31);
+                    break;
+                default:
+                    throw new ArgumentException("Quý không hợp lệ!!!!");
+            }
+
+            var total = da.DonHangs
+                .Where(s => s.NgayDatHang >= startDate && s.NgayDatHang <= endDate)
+                .Join(da.ChiTietDhs, d => d.MaDh, c => c.MaDh, (d, c) => (decimal)(c.SoLuong * c.DonGia))
+                .Sum();
+
+            return total;
+        }
         public decimal TongDoanhThuTheoThangCuaNam(int month)
         {
 

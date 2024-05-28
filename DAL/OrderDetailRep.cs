@@ -29,21 +29,16 @@ namespace QLBH.DAL
                     try
                     {
                         context.ChiTietDhs.Add(orderDetail);
-                        int result = context.SaveChanges();
+                        context.SaveChanges();
                         tran.Commit();
-                        res.SetData("201", result);
+                        res.SetData("201", "Them chi thiet don hang thanh cong.!");
                     }
-                    catch (DbUpdateException dbEx)
-                    {
-                        tran.Rollback();
-                        var innerException = dbEx.InnerException?.Message ?? dbEx.Message;
-                        res.SetError($"Database update exception: {innerException}");
-                    }
+                    
                     catch (Exception ex)
                     {
                         tran.Rollback();
 
-                        res.SetError($"Exception: {ex}");
+                        res.SetError(ex.Message);
                     }
                 }
             }

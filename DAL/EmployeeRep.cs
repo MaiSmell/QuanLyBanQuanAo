@@ -10,42 +10,15 @@ using System.Threading.Tasks;
 
 namespace QLBH.DAL
 {
-    public class OrderRep: GenericRep<QLBHContext, DonHang>
+    public class EmployeeRep : GenericRep<QLBHContext, NhanVien>
     {
-        //lay ra don hang theo id
-        public override DonHang Read(int id)
+        public override NhanVien Read(string id)
         {
-
-            var res = All.FirstOrDefault(o => o.MaDh == id);
-
+            var res = All.FirstOrDefault(s => s.MaNv == id);
             return res;
         }
-       
-       
-        //thêm đơn hàng
-        //public SingleRsp CreateOrder(DonHang order)
-        //{
-        //    var res = new SingleRsp();
-        //    using (var context = new QLBHContext())
-        //    {
-        //        using (var tran = context.Database.BeginTransaction())
-        //        {
-        //            try
-        //            {
-        //                var p = context.DonHangs.Add(order);
-        //                context.SaveChanges();
-        //                tran.Commit();
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                tran.Rollback();
-        //                res.SetError(ex.StackTrace);
-        //            }
-        //        }
-        //    }
-        //    return res;
-        //}
-        public SingleRsp CreateOrder(DonHang order)
+
+        public SingleRsp CreateEmployee(NhanVien nhanVien)
         {
             var res = new SingleRsp();
             using (var context = new QLBHContext())
@@ -54,24 +27,23 @@ namespace QLBH.DAL
                 {
                     try
                     {
-                        context.DonHangs.Add(order);
+                        context.NhanViens.Add(nhanVien);
                         context.SaveChanges();
                         tran.Commit();
-                        res.SetData("201", "Them khach hang thanh cong.!");
+                        res.SetData("201", "Them nhan vien thanh cong.!");
 
                     }
                     catch (Exception ex)
                     {
                         tran.Rollback();
 
-                        res.SetError(ex.Message);
+                        res.SetError($"Exception: {ex}");
                     }
                 }
             }
             return res;
         }
-
-        public SingleRsp DeleteOrder(DonHang order)
+        public SingleRsp DeleteEmployee(NhanVien nhanVien)
         {
             var res = new SingleRsp();
             using (var context = new QLBHContext())
@@ -80,22 +52,23 @@ namespace QLBH.DAL
                 {
                     try
                     {
-                        context.DonHangs.Remove(order);
-                        context.SaveChanges();
+                        context.NhanViens.Remove(nhanVien);
+                        int result = context.SaveChanges();
                         tran.Commit();
-
                     }
                     catch (Exception ex)
                     {
                         tran.Rollback();
                         res.SetError(ex.StackTrace);
-
                     }
                 }
             }
             return res;
         }
-        public SingleRsp UpdateOrder (DonHang order)
+
+       
+
+        public SingleRsp UpdateEmployee(NhanVien nhanVien)
         {
             var res = new SingleRsp();
             using (var context = new QLBHContext())
@@ -104,21 +77,20 @@ namespace QLBH.DAL
                 {
                     try
                     {
-                        context.DonHangs.Update(order);
+                        var p = context.NhanViens.Update(nhanVien);
                         context.SaveChanges();
                         tran.Commit();
-                        res.SetMessage("Cập nhật thành công");
+                        res.SetMessage("Cập nhật nhân viên  thành công!!!");
                     }
                     catch (Exception ex)
                     {
                         tran.Rollback();
                         res.SetError(ex.StackTrace);
-                        res.SetMessage("Cập nhật thất bại ");
+                        res.SetMessage("Cập nhật nhân viên thất bại!!!");
                     }
                 }
             }
             return res;
         }
-        
     }
 }

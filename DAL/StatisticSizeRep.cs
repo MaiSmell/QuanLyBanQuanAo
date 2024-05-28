@@ -1,4 +1,6 @@
-﻿using QLBH.Common.DAL;
+﻿using Microsoft.EntityFrameworkCore;
+using QLBH.Common.DAL;
+using QLBH.Common.Req;
 using QLBH.Common.Rsp;
 using QLBH.DAL.Models;
 using System;
@@ -16,14 +18,17 @@ namespace QLBH.DAL
         {
             da = new QLBHContext();
         }
-        //public decimal ThongkeSize(int Soluongtonkho )
-        //{
-        //    var total = da.SanPhamSizes
-        //        .GroupBy(s => s.Size)
-        //        .Select(s => new { s.Key, Soluongtonkho = s.Count() }).ToList();
-        //    return total;
-            
-
-        //}
+        public List<SanPhamSizeReq> ThongkeSize()
+        {
+            var ds = da.SanPhamSizes
+                             .GroupBy(s => s.Size)
+                             .Select(s => new SanPhamSizeReq
+                             {
+                                 Size = s.Key,
+                                 SoLuongTonKho   = s.Count()
+                             })
+                             .ToList();
+            return ds;
+        }
     }
 }

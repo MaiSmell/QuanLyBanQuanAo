@@ -22,14 +22,6 @@ namespace QLBH.DAL
             return res;
         }
 
-        //public string Remove(string keyWord)
-        //{
-        //    var m = base.All.First(i => i.MaKh == keyWord);
-        //    m = base.Delete(m);
-        //    return m.MaKh;
-        //}
-
-       
         public SingleRsp CreatCustomer(KhachHang khachHang)
         {
             var res = new SingleRsp();
@@ -42,7 +34,8 @@ namespace QLBH.DAL
                         context.KhachHangs.Add(khachHang);
                         context.SaveChanges();
                         tran.Commit();
-                         
+                        res.SetData("201", "Them khach hang thanh cong.!");
+
                     }
                     catch (Exception ex)
                     {

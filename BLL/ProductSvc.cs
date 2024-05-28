@@ -102,6 +102,7 @@ namespace QLBH.BLL
             res.Data = p;
             return res;
         }
+       
 
     }
 }

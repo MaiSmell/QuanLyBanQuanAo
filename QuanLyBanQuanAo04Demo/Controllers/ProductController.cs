@@ -67,5 +67,8 @@ namespace QuanLyBanQuanAo.Web.Controllers
             res.Data = productSvc.SearchProduct(searchProductcReq);
             return Ok(res);
         }
+
+        
+
     }
 }

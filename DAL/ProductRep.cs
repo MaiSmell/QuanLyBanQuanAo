@@ -13,6 +13,11 @@ namespace QLBH.DAL
 {
     public class ProductRep : GenericRep<QLBHContext, SanPham>
     {
+        private readonly QLBHContext da;
+        public ProductRep()
+        {
+            da = new QLBHContext();
+        }
         public override SanPham Read(string keyword)
         {
             var res = All.FirstOrDefault(s => s.MaSp == keyword);
@@ -105,5 +110,7 @@ namespace QLBH.DAL
            
             return All.Where(x => x.TenSp.Contains(keyWord)).ToList();
         }
+
+       
     }
 }
