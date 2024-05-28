@@ -33,5 +33,6 @@ namespace QuanLyBanQuanAo.Web.Controllers
 
             return Ok(new { Color = color, Total = total });
         }
+
     }
 }

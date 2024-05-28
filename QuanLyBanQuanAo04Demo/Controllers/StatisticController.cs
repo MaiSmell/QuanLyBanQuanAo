@@ -36,6 +36,18 @@ namespace QuanLyBanQuanAo.Web.Controllers
             var res = statisticSvc.TongDoanhThuTheoQuy(quarter);
             return Ok(res);
         }
-        
+        [HttpPost("count-orders-by-makh")]
+        public IActionResult CountOrdersByMaKh()
+        {
+            var result = statisticSvc.CountOrdersByMaKh();
+            return Ok(result);
+        }
+        [HttpPost("count-total-revenue-by-makh")]
+        public IActionResult CountTotalRevenueByMaKh([FromBody] string id)
+        {
+            var result = statisticSvc.CountTotalRevenueByMaKh(id);
+            return Ok(result);
+        }
+
     }
 }

@@ -75,5 +75,23 @@ namespace QLBH.DAL
                 .Sum();
             return total;
         }
+        public List<object> CountOrdersByMaKh()
+        {
+            var ds = da.DonHangs
+                .GroupBy(s => s.MaKh)
+                .Select(s => new { s.Key, Soluongdonhang = s.Count() })
+                .ToList<object>();
+            return ds;
+        }
+        public List<object> CountTotalRevenueByMaKh(string id)
+        {
+            var ds = da.DonHangs
+                .Where(s => s.MaKh == id)
+                .Join(da.ChiTietDhs, d => d.MaDh, o => o.MaDh, (d, o) => new { d.MaDh, Tongtien = o.SoLuong * o.DonGia })
+                .GroupBy(s => s.MaDh)
+                .Select(s => new { s.Key, Soluong = s.Sum(s => s.Tongtien) })
+                .ToList<object>();
+            return ds;
+        }
     }
 }

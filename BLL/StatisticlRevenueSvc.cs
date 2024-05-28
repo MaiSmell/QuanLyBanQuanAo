@@ -69,6 +69,14 @@ namespace QLBH.BLL
             res.Data = result;
             return res;
         }
+        public List<object> CountOrdersByMaKh()
+        {
+            return statisticRep.CountOrdersByMaKh();
+        }
+        public List<object> CountTotalRevenueByMaKh(string id)
+        {
+            return statisticRep.CountTotalRevenueByMaKh(id);
+        }
 
     }
 }

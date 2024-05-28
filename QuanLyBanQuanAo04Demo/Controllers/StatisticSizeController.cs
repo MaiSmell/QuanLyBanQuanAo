@@ -1,13 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using QLBH.BLL;
+using QLBH.Common.Req;
+using QLBH.Common.Rsp;
 
 namespace QuanLyBanQuanAo.Web.Controllers
 {
-    public class StatisticSizeController
+    [Route("api/[controller]")]
+    [ApiController]
+    public class StatisticSizeController : ControllerBase
     {
-        
         private StatisticSizeSvc statisticSizeSvc;
-        
+
         public StatisticSizeController()
         {
 
@@ -17,7 +21,14 @@ namespace QuanLyBanQuanAo.Web.Controllers
         public IActionResult ThongkeSize()
         {
             var result = statisticSizeSvc.ThongkeSize();
-            return new OkObjectResult(result);
+            return Ok (result);
+        }
+        [HttpPost("Search-Product-Size")]
+        public IActionResult SearchProductSize([FromBody] SearchSizeReq searchSizeReq)
+        {
+            var res = new SingleRsp();
+            res.Data = statisticSizeSvc.SearchProductSize(searchSizeReq);
+            return Ok(res);
         }
     }
 }
