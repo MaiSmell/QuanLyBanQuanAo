@@ -30,7 +30,7 @@ namespace QLBH.BLL
         {
 
             ChiTietDh ct = new ChiTietDh();
-
+            ct.MaDh = orderDetailReq.MaDh;
             ct.MaSp = orderDetailReq.MaSp;
             ct.MaGiamGia = orderDetailReq.MaGiamGia;
             ct.SoLuong = orderDetailReq.SoLuong;

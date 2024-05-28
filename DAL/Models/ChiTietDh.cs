@@ -14,7 +14,7 @@ namespace QLBH.DAL.Models
         public int? SoLuong { get; set; }
 
         public virtual DonHang MaDhNavigation { get; set; }
-        public virtual GiamGium MaGiamGiaNavigation { get; set; }
+        public virtual GiamGia MaGiamGiaNavigation { get; set; }
         public virtual SanPham MaSpNavigation { get; set; }
     }
 }

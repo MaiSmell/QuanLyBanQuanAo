@@ -13,5 +13,7 @@ namespace QLBH.Common.Req
         public int MaDh { get; set; }
         public double? DonGia { get; set; }
         public int? SoLuong { get; set; }
+        
+      
     }
 }

@@ -12,6 +12,9 @@ namespace QLBH.DAL
 {
     public class OrderDetailRep : GenericRep<QLBHContext, ChiTietDh>
     {
+
+        
+
         public override ChiTietDh Read(int id)
         {
 
@@ -21,8 +24,10 @@ namespace QLBH.DAL
         }
         public SingleRsp CreateOrderDetail(ChiTietDh orderDetail)
         {
+            
             var res = new SingleRsp();
             using (var context = new QLBHContext())
+
             {
                 using (var tran = context.Database.BeginTransaction())
                 {

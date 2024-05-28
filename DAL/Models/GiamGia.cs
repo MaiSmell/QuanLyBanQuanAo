@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace QLBH.DAL.Models
 {
-    public partial class GiamGium
+    public partial class GiamGia
     {
-        public GiamGium()
+        public GiamGia()
         {
             ChiTietDhs = new HashSet<ChiTietDh>();
         }

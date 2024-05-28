@@ -19,7 +19,7 @@ namespace QLBH.DAL.Models
 
         public virtual DbSet<ChiTietDh> ChiTietDhs { get; set; }
         public virtual DbSet<DonHang> DonHangs { get; set; }
-        public virtual DbSet<GiamGium> GiamGia { get; set; }
+        public virtual DbSet<GiamGia> GiamGia { get; set; }
         public virtual DbSet<GiaoHang> GiaoHangs { get; set; }
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<LoaiHang> LoaiHangs { get; set; }
@@ -125,7 +125,7 @@ namespace QLBH.DAL.Models
                     .HasConstraintName("FK_DonHang_GiaoHang");
             });
 
-            modelBuilder.Entity<GiamGium>(entity =>
+            modelBuilder.Entity<GiamGia>(entity =>
             {
                 entity.HasKey(e => e.MaGiamGia);
 
